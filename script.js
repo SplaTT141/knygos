@@ -1,6 +1,7 @@
 const kingBooksDOM = document.getElementById('king-books');
 const loaderDOM = document.getElementById('loader');
-const tableDOM = document.getElementById('table')
+const tableDOM = document.getElementById('table');
+const villainsRowDOM = document.getElementById('villains-row');
 
 tableDOM.classList.add('hide');
 loaderDOM.classList.add('show');
@@ -8,14 +9,13 @@ loaderDOM.classList.add('show');
 fetch('https://stephen-king-api.onrender.com/api/books')
     .then((res) => res.json())
     .then((data) => {
-        console.log(data);
 
         tableDOM.classList.remove('hide');
         loaderDOM.classList.remove('show');
 
         data.data.forEach((book) => {
             kingBooksDOM.insertAdjacentHTML('beforeend',
-                `<tr>
+                `<tr data-bookid="${book.id}">
                     <td>${book.Title}</td>
                     <td>${book.Year}</td>
                     <td>${book.Publisher}</td>
@@ -29,21 +29,23 @@ fetch('https://stephen-king-api.onrender.com/api/books')
     .catch((error) => console.log(error));
 
 kingBooksDOM.addEventListener("click", (e) => {
+    villainsRowDOM && kingBooksDOM.removeChild(villainsRowDOM);
     const tr = e.target.parentElement;
     const bid = tr.dataset.bookid;
+    if (villainsRowDOM && villainsRowDOM != tr) {
+        kingBooksDOM.removeChild(villainsRowDOM);
+    }
 
     fetch("https://stephen-king-api.onrender.com/api/book/" + bid)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
             tr.insertAdjacentHTML(
-                "afterend",
-                `
-        <tr>
-          <td colspan="2">${data.data.Title}</td>
-          <td colspan="4">${data.data.villains}</td>
-        </tr>
-        `
+                "afterend", `
+                <tr id="villains-row">
+                  <td colspan="6">Villains: <br/> ${data.data.villains
+                .map((villain) => villain.name)
+                .join('<br/>')}</td>
+                </tr>`
             );
         })
         .catch((err) => console.log(err));

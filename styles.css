@@ -93,3 +93,7 @@ tbody tr:hover {
 .hide {
   display: none;
 }
+
+#villains-row td {
+  background-color: #512406;
+}
