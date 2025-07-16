@@ -1,3 +1,8 @@
+@font-face {
+  font-family: helloween;
+  src: url(./fonts/BloodyTerror.ttf);
+}
+
 body,
 body * {
   box-sizing: border-box;
@@ -9,6 +14,11 @@ body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background-color: #222;
   color: #ccc;
+}
+
+h1 {
+  font-family: helloween;
+  letter-spacing: 4px;
 }
 
 header,
@@ -57,4 +67,29 @@ tbody tr {
 
 tbody tr:hover {
   background-color: #430909;
+}
+
+/* Loader */
+
+#loader {
+  position: absolute;
+  background-color: black;
+  padding: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-family: helloween;
+  letter-spacing: 4px;
+  display: none;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+#loader.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
