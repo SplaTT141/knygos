@@ -42,7 +42,7 @@ kingBooksDOM.addEventListener("click", (e) => {
             tr.insertAdjacentHTML(
                 "afterend", `
                 <tr id="villains-row">
-                    <td colspan="1">Villains</td>  
+                    <td colspan="1">Villains:</td>  
                     <td colspan="5">${data.data.villains
                 .map((villain) => villain.name)
                 .join('<br/>')}</td>
