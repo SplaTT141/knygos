@@ -3,6 +3,20 @@ const loaderDOM = document.getElementById('loader');
 const tableDOM = document.getElementById('table');
 const villainsRowDOM = document.getElementById('villains-row');
 
+const modalWindow = document.createElement("div");
+modalWindow.id = 'modal';
+
+const closeBtn = document.createElement('div');
+closeBtn.classList.add('close-modal');
+closeBtn.textContent = 'x';
+
+const contentDOM = document.createElement('div');
+closeBtn.classList.add('api-content');
+
+modalWindow.appendChild(closeBtn);
+modalWindow.appendChild(contentDOM);
+console.log(modalWindow);
+
 tableDOM.classList.add('hide');
 loaderDOM.classList.add('show');
 
